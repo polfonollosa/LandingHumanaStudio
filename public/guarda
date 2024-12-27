@@ -1,0 +1,40 @@
+<TituloParrafo
+      title="Heeria"
+      name="Yasmina Harrison"
+      description="Founder & CEO, Tzol'skin"
+    />
+    <HoritzontalVideoCard
+      vidSrc="/public/1.mp4"
+      title="Von Di"
+      description="CEO & Founder, Digital Destiny"
+    />
+    <TituloParrafo
+      title="Aida Lae & Von Di"
+      name="Francesco Rocca"
+      description="Managing Director, Impact Hub Lisbon"
+    />
+    <HoritzontalVideoCard
+      vidSrc="/public/2.mp4"
+      title="Tiago Caldeira"
+      description="Founder, Oficina33"
+    />
+    <TituloParrafo
+      title="Future Print Club"
+      name="Creating better future through print."
+      description="Creating better future through print."
+    />
+    <HoritzontalVideoCard
+      vidSrc="/public/3.mp4"
+      title="Oficina33"
+      description="Building unique handmade furniture."
+    />
+    <TituloParrafo
+      title="Heeria"
+      name="Yasmina Harrison"
+      description="Founder & CEO, Tzol'skin"
+    />
+    <TituloParrafo
+      title="Heeria"
+      name="Yasmina Harrison"
+      description="Founder & CEO, Tzol'skin"
+    />

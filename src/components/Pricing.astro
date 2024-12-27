@@ -1,0 +1,75 @@
+<div class="w-screen flex flex-col items-center justify-center bg-white pt-40">
+    <section class="w-11/12 h-screen border-2 border-black flex">
+        <div id="noResponsive" class="flex-col flex w-1/2 h-full items-center justify-center px-32 pb-6 space-y-5">  
+            <p class="text-black text-lg" style="padding-right: 51vh;">(why us?)</p>
+            <h3 class="text-black font-medium text-3xl">Two designers. Over two decades of combined experience. Focused on your goals. Weekly meetings. Starting from two weeks.</h3>
+        </div>
+        <div id="Responsive" class="flex-col flex w-1/2 h-full space-y-10  justify-center pb-16" style="padding-left: 18vh; padding-top: 6vh;">
+            <div class="space-y-4">
+                <ul class="flex space-x-5">
+                    <li class="text-lg text-black font-medium">
+                        <a href="#" id="euro">( EUR )</a>
+                    </li>
+                    <li class="text-lg text-black font-medium">
+                        <a href="#" id="dollar">USD</a>
+                    </li>
+                    <li class="text-lg text-black font-medium">
+                        <a href="#" id="libra">GBP</a>
+                    </li>
+                </ul>
+                <div class="flex text-black font-semibold text-5xl">
+                    <h1 id="moneda-change">€</h1>
+                    <h1>1400/per week</h1>
+                </div>
+            </div>
+            
+            <button id="boto-pricing" class="animated-button bg-red-300 flex justify-center items-center h-8 space-x-2 rounded transition: ease 1s;" style="width: 25vh;">
+                <div class="pt-1"><div class="w-2 h-2 rounded-full bg-black"></div></div>
+                <p class="text-black text-lg">let's get started</p>
+            </button>   
+        </div>
+    </section>
+</div>
+
+<style>
+    .animated-button:hover {
+    animation: color-change 2s infinite ease;
+  }
+
+  @keyframes color-change {
+    0% { background-color: #4CAF50; } /* Verde */
+    25% { background-color: #FF5733; } /* Naranja */
+    50% { background-color: #FFC300; } /* Amarillo */
+    75% { background-color: #33FFBD; } /* Verde Aqua */
+    100% { background-color: #4CAF50; } /* Volver al verde */
+  }
+</style>
+
+<script>
+    const euro  = document.getElementById('euro');
+    const dollar  = document.getElementById('dollar');
+    const libra  = document.getElementById('libra');
+    const monedaChange = document.getElementById('moneda-change');
+    if(euro && dollar && libra && monedaChange){
+        
+        euro.addEventListener('click', () => {
+            euro.innerHTML = '( EUR )';
+            dollar.innerHTML = 'USD';
+            libra.innerHTML = 'GBP';
+            monedaChange.innerHTML = '€';
+        });
+        dollar.addEventListener('click', () => {
+            euro.innerHTML = 'EUR';
+            dollar.innerHTML = '( USD )';   
+            libra.innerHTML = 'GBP';
+            monedaChange.innerHTML = '$';
+        });
+        libra.addEventListener('click', () => {
+            euro.innerHTML = 'EUR';
+            dollar.innerHTML = 'USD';
+            libra.innerHTML = '( GBP )';
+            monedaChange.innerHTML = '£';
+        });
+    }
+
+</script>

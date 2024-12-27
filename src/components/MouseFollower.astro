@@ -1,0 +1,157 @@
+<style>
+  .circle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px; /* Tamaño del círculo */
+    height: 10px;
+    background-color: black; /* Color y opacidad */
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  #contenedor-hover {
+    position: fixed;
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    transition: all 0.1s ease;
+  }
+
+  #contenedor-hover div {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+  }
+
+  #contenedor-hover p {
+    font-size: 14px;
+    margin: 0;
+    padding-left: 5px;
+  }
+
+  #contenedor-hover-nav {
+    position: fixed;
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    transition: all 0.1s ease;
+  }
+
+  #contenedor-hover-nav p {
+    font-size: 18px;
+    margin: 0;
+  }
+</style>
+
+<div class="circle" id="mouse-follower"></div>
+
+<div id="contenedor-hover" class="flex justify-center items-center space-x-2">
+  <div></div>
+  <p>open</p>
+</div>
+
+<div id="contenedor-hover-nav">
+  <p>↗</p>
+</div>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const links_nav = document.querySelectorAll('nav a');   
+    const links = document.querySelectorAll('a'); // Todos los enlaces
+    const circle = document.getElementById('mouse-follower'); // Círculo inicial
+    const hoverContainer = document.getElementById('contenedor-hover');
+    const hoverContainerNav = document.getElementById('contenedor-hover-nav'); // Contenedor que aparece
+    let mouseX = 0, mouseY = 0; // Coordenadas del ratón
+    let circleX = 0, circleY = 0; // Posición actual del círculo
+    const delay = 0.1; // Suavidad del movimiento
+    const colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#E74C3C']; // Colores aleatorios
+
+    // Actualiza las coordenadas del ratón en tiempo real
+    document.addEventListener('mousemove', (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    });
+
+    // Cambia entre el círculo y el contenedor-hover
+    links.forEach(link => {
+      link.addEventListener('mouseover', () => {
+        // Oculta el círculo y muestra el contenedor-hover
+        if (circle) circle.style.display = 'none';
+        if (hoverContainer) {
+          hoverContainer.style.display = 'flex';
+          hoverContainer.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+        if(hoverContainerNav){
+          hoverContainerNav.style.display = 'none'; // Asegúrate de ocultar el contenedor de navegación
+        }
+      });
+
+      link.addEventListener('mouseout', () => {
+        // Muestra el círculo y oculta el contenedor-hover
+        if (circle) circle.style.display = 'block';
+        if (hoverContainer) hoverContainer.style.display = 'none';
+        if(hoverContainerNav) hoverContainerNav.style.display = 'none';
+      });
+    });
+
+    links_nav.forEach(link => {
+      link.addEventListener('mouseover', () => {
+        // Muestra el contenedor-nav con el ícono
+        if (circle) circle.style.display = 'none';
+        if (hoverContainerNav) {
+          hoverContainerNav.style.display = 'flex';
+          hoverContainerNav.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+        if (hoverContainer) hoverContainer.style.display = 'none'; // Asegúrate de ocultar el otro contenedor
+      });
+
+      link.addEventListener('mouseout', () => {
+        // Muestra el círculo y oculta el contenedor-nav
+        if (circle) circle.style.display = 'block';
+        if (hoverContainerNav) hoverContainerNav.style.display = 'none';
+        if (hoverContainer) hoverContainer.style.display = 'none';
+      });
+    });
+
+    // Usa `requestAnimationFrame` para mover los elementos con retraso
+    function animateElements() {
+      // Interpola gradualmente las coordenadas hacia las del ratón
+      circleX += (mouseX - circleX) * delay;
+      circleY += (mouseY - circleY) * delay;
+
+      // Aplica las nuevas coordenadas al círculo o al contenedor-hover según el estado
+      if (circle && circle.style.display !== 'none') {
+        circle.style.top = `${circleY - 3}px`;
+        circle.style.left = `${circleX}px`;
+      } else if (hoverContainer && hoverContainer.style.display === 'flex') {
+        hoverContainer.style.top = `${circleY - 5}px`;
+        hoverContainer.style.left = `${circleX + 17}px`;
+      } else if (hoverContainerNav && hoverContainerNav.style.display === 'flex') {
+        hoverContainerNav.style.top = `${circleY - 10}px`;
+        hoverContainerNav.style.left = `${circleX}px`;
+      }
+
+      // Llama de nuevo a la animación
+      requestAnimationFrame(animateElements);
+    }
+
+    // Inicia la animación
+    animateElements();
+  }
+</script>

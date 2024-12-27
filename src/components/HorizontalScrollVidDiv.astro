@@ -1,0 +1,62 @@
+---
+import HoritzontalVideoCard from '../layouts/HoritzontalVideoCard.astro'
+import TituloParrafo from '../layouts/TituloParrafo.astro'
+---
+
+<div id="scroll-container" class="h-3/4 bg-white overflow-x-hidden flex">
+  <!-- Elementos hijos con ancho fijo -->
+  <div class="h-full flex-none w-1/2 justify-center flex flex-col items-center">
+    <HoritzontalVideoCard imageSrc="public/1.mp4" title="Video Title" description="video parraf omg." />
+  </div>
+  <div class="h-full flex-none w-1/2  flex flex-col justify-center items-center">
+    <TituloParrafo title="Video Title" name="Von Di" description="I have been contacted by certained Google advisors while they were pushig trophies in clash royale i took advatage of it ad farmed 100 cadnies" />
+  </div>
+  <div class="h-full flex-none w-1/2 flex flex-col justify-center items-center">
+    <HoritzontalVideoCard imageSrc="public/2.mp4" title="Video Title" description="video parraf omg." />
+  </div>
+  <div class="h-full flex-none w-1/2 flex flex-col justify-center items-center">
+    <TituloParrafo title="Video Title" name="Von Di" description="I have been contacted by certained Google advisors while they were pushig trophies in clash royale i took advatage of it ad farmed 100 cadnies" />
+  </div>
+  <div class="h-full flex-none w-1/2 flex flex-col justify-center items-center">
+    <HoritzontalVideoCard imageSrc="public/3.mp4" title="Video Title" description="video parraf omg." />
+  </div>
+  <div class="h-full flex-none w-1/2 flex flex-col justify-center items-center">
+    <TituloParrafo title="Video Title" name="Von Di" description="I have been contacted by certained Google advisors while they were pushig trophies in clash royale i took advatage of it ad farmed 100 cadnies" />
+  </div>
+</div>
+
+<script>
+  const scrollContainer = document.getElementById('scroll-container');
+
+  let isDragging = false;
+  let startX: number;
+  let scrollLeft: number;
+
+  if(scrollContainer){
+
+  scrollContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    scrollContainer.style.cursor = 'grabbing';
+    startX = e.pageX - scrollContainer.offsetLeft;
+    scrollLeft = scrollContainer.scrollLeft;
+  });
+
+  scrollContainer.addEventListener('mouseleave', () => {
+    isDragging = false;
+    scrollContainer.style.cursor = 'grab';
+  });
+
+  scrollContainer.addEventListener('mouseup', () => {
+    isDragging = false;
+    scrollContainer.style.cursor = 'grab';
+  });
+
+  scrollContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.offsetLeft;
+    const walk = (x - startX) * 2; // Ajusta la sensibilidad del desplazamiento
+    scrollContainer.scrollLeft = scrollLeft - walk;
+  });
+  }
+</script>

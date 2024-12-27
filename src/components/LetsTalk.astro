@@ -1,0 +1,76 @@
+---
+// filepath: /c:/Users/Usuario/firstAstro/src/components/LetsTalk.astro
+---
+
+<nav id="div-xic" class="w-36 h-7 top-1/2 fixed bg-white text-black flex space-x-2 z-999 rounded transform -rotate-90" style="right: -58px;">
+    <a href="#" class="flex space-x-2 items-center justify-center pl-6">
+        <div class="h-2 w-2 bg-black rounded-full"></div>
+        <p class="text-lg text-black">let's talk?</p>
+    </a> 
+</nav>
+
+<nav id="div-big" class="fixed w-64 h-48 top-1/3 hidden flex bg-white text-black p-4 shadow-lg" style="right: 0;">
+    <a href="#" class="space-x-1">
+        <div class="h-3/4 w-full flex justify-center items-center">
+            <div class="w-2/3 h-full flex flex-col items-start space-y-2">
+                <h3 class="text-m">Questions?</h3>
+                <p class="text-sm">Have a quick call with Tiago to discuss how it works and understand your requirements.</p>
+            </div>
+            <div class="w-1/3 h-full flex flex-col justify-center items-center">
+                <div class="w-8 h-8 rounded-full bg-black"></div>
+            </div>
+        </div>
+        <div class="h-1/4 w-full flex items-center space-x-1">
+            <div class="h-2 w-2 bg-black rounded-full"></div>
+            <p>book a call</p>
+        </div>
+    </a>
+</nav>
+
+<script>
+    const divXic = document.getElementById('div-xic');
+    const divBig = document.getElementById('div-big');
+
+    function toggleVisibility() {
+        const scrollPosition = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        if (divXic && divBig) {
+        // Check if the user is past the first page
+        if (scrollPosition > viewportHeight) {
+            divXic.classList.remove('hidden');
+        } else {
+            divXic.classList.add('hidden');
+            divBig.classList.add('hidden');
+        }
+        }
+    }
+
+    if (divXic && divBig) {
+        // Handle hover to toggle between small and big navs
+        divXic.addEventListener('mouseover', () => {
+            divBig.classList.remove('hidden');
+            divXic.classList.add('hidden');
+        });
+
+        divBig.addEventListener('mouseout', () => {
+            divBig.classList.add('hidden');
+            divXic.classList.remove('hidden');
+        });
+
+        // Add scroll listener
+        window.addEventListener('scroll', toggleVisibility);
+
+        // Initialize visibility based on current scroll position
+        toggleVisibility();
+    }
+</script>
+
+<style>
+  #div-xic {
+    transition: all 0.3s ease;
+  }
+
+  #div-big {
+    transition: all 0.3s ease;
+  }
+</style>

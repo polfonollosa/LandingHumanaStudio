@@ -1,0 +1,25 @@
+---
+// filepath: /c:/Users/Usuario/firstAstro/src/layouts/HoritzontalVideoCard.astro
+
+// Definimos las propiedades (props) que recibirá el componente
+const { imageSrc, title, description } = Astro.props;
+---
+
+<div class="h-5/6 w-5/6 pt-10 pl-32">
+  <div draggable="false" class="h-5/6 w-full flex flex-col justify-center items-center">
+    <a href="" class="h-full w-full"><video src={imageSrc} class="h-full w-full object-fill autoplay loop muted"></video></a>
+    
+  </div>
+  <div class="text-sm h-1/6 w-full text-black px-0 text-lg font-semibold">
+    <h3>{title}</h3>
+    <p class="text-gray-500 ">{description}</p>
+  </div>
+</div>
+
+<style>
+  video {
+    height: 100%;
+    width: 75%;
+    object-fit: fill; /* Esto hace que el video ocupe todo el contenedor, deformándose si es necesario */
+  }
+</style>

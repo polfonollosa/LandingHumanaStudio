@@ -1,0 +1,122 @@
+<nav id="nav" class="">
+    <ul id="contenedor-nav-titol" class="space-x-1 pb-5" style="transition: 1s;">
+            <a class="text-3xl pl-5" href="#">(</a>
+            <a id="iet" class="text-3xl" href="#">humana</a>
+            <a id="right"  style="transition: 1s;" class="text-3xl" href="#">)</a>
+    </ul>
+    <ul id="contenedor-nav-lista" class="space-x-1 pr-32 pb-5" style="transition: 0.75s;">
+            <a id="work" href="#"><p class="text-base" style="transition: 0.5s;">Work,</p></a>
+            <a id="pricing" href="#"><p class="text-base" style="transition: 1s;">Pricing,</p></a>
+            <a id="about" href="#"><p class="text-base" style="transition: 1.5s;">About</p></a>
+    </ul>
+    <ul id="contenedor-nav-final" class="space-x-2" style="transition: 1s;">
+            <div class="pb-5"><div class="w-3 h-3 rounded-full bg-black"></div></div>
+            <a id="abouti" href="#"><p class="text-base pr-7 pb-5">work with us</p></a>
+    </ul>    
+</nav>
+
+<style>
+    #nav {
+        display: flex;
+        align-items: center;
+        height: 10vh;
+        background-color: none;
+        color: #000;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        margin-bottom: 2%;
+        padding: 10px;
+        font-family: Open Sans, serif;
+       
+    }
+
+    #contenedor-nav-titol {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        width: 66%;
+        height: 100%;
+        padding-left: 2px;
+        font-size: large;
+    }
+
+
+
+    #contenedor-nav-lista {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 17%;
+        height: 100%;
+
+    }
+
+
+
+    #contenedor-nav-final {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        width: 17%;
+        height: 100%;
+    }
+
+    #nav-list img {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+    }
+
+    #contenedor-nav-lista a {
+        font-weight: 650;
+        color: #000;
+    }
+
+    #contenedor-nav-final a{
+        font-weight: 650;
+        color: #000;
+    }
+</style>
+
+<script>
+    if (typeof window !== 'undefined') {
+        let lastScrollTop = 0; // Guardamos la última posición de scroll
+        const nav = document.getElementById('nav'); // Seleccionamos el nav por su id
+        const work = document.getElementById('work');
+        const pricing = document.getElementById('pricing');
+        const about = document.getElementById('about');
+        const iet = document.getElementById('iet');
+        const finals = document.getElementById('contenedor-nav-final');
+        const lista = document.getElementById('contenedor-nav-lista');
+        const right = document.getElementById('right');
+      // Función que detecta el scroll y oculta o muestra el nav
+      
+      window.addEventListener('scroll', function () {
+        let scrollTop = document.documentElement.scrollTop;
+        if(pricing && about && work && finals && right && lista && iet){
+            if (scrollTop > lastScrollTop) {
+          // Si hemos desplazado hacia abajo, ocultamos el nav
+            pricing.style.transform = 'translateY(-200%)';
+            about.style.transform = 'translateY(-200%)';
+            work.style.transform = 'translateY(-200%)';
+            finals.style.transform = 'translateY(-200%)';
+            right.style.transform = 'translateX(-100%) text-3xl';
+            lista.style.transform = 'translateY(-200%)';
+            iet.innerHTML = 'h';
+        } else {
+          // Si desplazamos hacia arriba, mostramos el nav
+          lista.style.transform = 'translateY(0)';
+            work.style.transform = 'translateY(0)';
+            pricing.style.transform = 'translateY(0)';
+            about.style.transform = 'translateY(0)';
+            finals.style.transform = 'translateY(0)';
+            iet.innerHTML = 'humana';
+            
+            right.style.transform = 'translateX(0)';
+        }
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Si es 0 conserva el valor, si no, guarda la posición de scroll
+      });
+    }
+</script>

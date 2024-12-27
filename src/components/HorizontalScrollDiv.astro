@@ -1,0 +1,93 @@
+---
+import HoritzontalCard from "../layouts/HoritzontalCard.astro";
+---
+
+<div class="scroll-container h-3/4 w-screen bg-white" id="scrollContainer">
+  <div class="flex items-center space-x-4">
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/anillo.jpg"
+      title="Heeria"
+      description="Lab grown diamonds and recycled gold."
+    /></a>
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/libroNegro.jpg"
+      title="CityLeaks"
+      description="An urban art festival in the center of Europe."
+    /></a>
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/cd.jpg"
+      title="Aida Lae & Von Di"
+      description="Interstellar single cover design."
+    /></a>
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/vinilo.jpg"
+      title="James Flower"
+      description="An identity for warm textured sounds."
+    /></a>
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/camiseta.jpg"
+      title="Future Print Club"
+      description="Creating better future through print."
+    /></a>
+    <a href="" draggable="false"><HoritzontalCard
+      imageSrc="/public/oficina33.jpg"
+      title="Oficina33"
+      description="Building unique handmade furniture."
+    /></a>
+    
+  </div>
+</div>
+
+<style>
+  .scroll-container {
+    display: flex;
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+    cursor: grab; /* Muestra el cursor como si fuera una mano para indicar que es arrastrable */
+  }
+
+  .scroll-container:active {
+    cursor: grabbing; /* Cambia el cursor cuando se está arrastrando */
+  }
+
+  .scroll-container .flex {
+    display: flex;
+  }
+</style>
+
+<script>
+  // Obtener el contenedor donde se hará el desplazamiento
+  const scrollContainer = document.getElementById('scrollContainer');
+
+  // Variables para controlar el arrastre
+  let isDragging = false;
+  let startX: number;
+  let scrollLeft: number;
+
+  // Asegurarnos de que el contenedor exista antes de añadir los event listeners
+  if (scrollContainer) {
+    scrollContainer.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+      scrollContainer.style.cursor = 'grabbing'; // Cambia el cursor a "grabbing"
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+      isDragging = false;
+      scrollContainer.style.cursor = 'grab'; // Cambia el cursor de vuelta a "grab" al salir
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+      isDragging = false;
+      scrollContainer.style.cursor = 'grab'; // Cambia el cursor de vuelta a "grab" al soltar
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+      if (!isDragging) return; // Si no se está arrastrando, no hace nada
+      e.preventDefault();
+      const x = e.pageX - scrollContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Controla la velocidad de desplazamiento
+      scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+  }
+</script>

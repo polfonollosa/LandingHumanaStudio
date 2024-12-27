@@ -1,0 +1,72 @@
+<section id="container-paint" class="h-3/4 w-screen bg-white flex flex-col justify-center items-center">
+    <p class="text-3xl text-black">Are we a good match? Click to book a call or message us.</p>
+</section>
+
+<script>
+    const colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#E74C3C']; // Colores aleatorios
+    const frases = ['no smokig', 'fitness', 'enjoying', 'chill <3', 'no panic', 'dream up!']; // Frases aleatorias
+    const container = document.getElementById('container-paint');
+    let guardX = 0;
+    let guardY = 0;
+
+    if (container) {
+        container.addEventListener('mousemove', function (event) {   
+            if(guardX === 0 && guardY === 0){
+                crearTarjeta(event);
+                guardX = event.pageX;
+                guardY = event.pageY;
+            }
+            if (Math.abs(event.pageX - guardX) > 50 || Math.abs(event.pageY - guardY) > 50) {
+                crearTarjeta(event);
+                guardX = event.pageX;
+                guardY = event.pageY;
+            }
+        });
+    }
+
+    function crearTarjeta(event: MouseEvent) {
+        const mouseX = event.pageX; // Posición X del ratón
+        const mouseY = event.pageY; // Posición Y del ratón
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        let parraf = frases[Math.floor(Math.random() * frases.length)];
+
+        // Crear estructura de la tarjeta
+        let struc = document.createElement('div');
+        struc.className = 'h-10 flex space-x-1 justify-center items-center rounded px-5';
+        struc.style.backgroundColor = color;
+        struc.style.position = 'absolute';
+        struc.style.top = `${mouseY}px`;
+        struc.style.left = `${mouseX}px`;
+
+        // Estilo para transición de opacity
+        struc.style.transition = 'opacity 5s ease, transform 3s ease';
+
+        let circle = document.createElement('div');
+        circle.className = 'h-2 w-2 rounded-full bg-black';
+        struc.appendChild(circle);
+
+        let text = document.createElement('p');
+        text.id = 'parraf';
+        text.className = 'text-black';
+        text.textContent = parraf;
+        struc.appendChild(text);
+
+        // Añadir la tarjeta al contenedor
+        if (container) {
+            container.appendChild(struc);
+        }
+
+        // Aplicar efecto de desaparición con opacity y transform
+        setTimeout(() => {
+            struc.style.opacity = '0';
+            struc.style.transform = 'translateY(-20px)';
+        }, 0);
+
+        // Eliminar el elemento del DOM al finalizar la transición
+        setTimeout(() => {
+            if (container && struc.parentElement === container) {
+                container.removeChild(struc);
+            }
+        }, 5000); // Coincide con la duración de la transición
+    }
+</script>
